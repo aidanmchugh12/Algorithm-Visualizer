@@ -1,0 +1,26 @@
+body {
+
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.array-container {
+    margin: 0;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+  
+.array-bar {
+    width: 50px;
+    display: inline-block;
+    margin: 0 5px;
+    background-color: black;
+  }
