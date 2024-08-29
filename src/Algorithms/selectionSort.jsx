@@ -1,39 +1,37 @@
-// function SelectionSort(array) {
-//     for(let i = 0; i < array.length; i++) {
-//         var min = i;
-//         for(let curr = i + 1; curr < array.length; curr++) {
-//             if(array[curr] < array[min]) {
-//                 min = curr;
-//             }
-//         }
+export const selectionSort = async (array, getSpeed, updateBars) => {
+    const barColors = new Array(array.length).fill('black');
+    const delay = () => new Promise((resolve) => setTimeout(resolve, getSpeed()));
 
-//         if(i !== min) {
-//             var temp = array[i];
-//             array[i] = array[min];
-//             array[min] = temp;
-//         }
-//     }
-
-//     return array;
-// }
-
-export function getSelectionSortAnimation(array) {
-    var animations = []
     for(let i = 0; i < array.length; i++) {
-        var min = i;
+        let minIndex = i;
+
         for(let curr = i + 1; curr < array.length; curr++) {
-            if(array[curr] < array[min]) {
-                min = curr;
+            barColors[curr] = 'red';
+            updateBars([...barColors], array);
+
+            await delay();
+
+            if(array[curr] < array[minIndex]) {
+                barColors[minIndex] = 'black';
+                minIndex = curr;
+                barColors[minIndex] = 'yellow';
+            } else {
+                barColors[curr] = 'black';
             }
+
+            updateBars([...barColors], array);
         }
 
-        if(i !== min) {
-            var temp = array[i];
-            array[i] = array[min];
-            array[min] = temp;
-            animations.push([i, min]);
+        if(i !== minIndex) {
+            [array[i], array[minIndex]] = [array[minIndex], array[i]];
+            
+            barColors[i] = 'green';
+            barColors[minIndex] = 'black';
+        } else {
+            barColors[i] = 'green';
         }
+
+        updateBars([...barColors], array);
+        await delay();
     }
-
-    return animations;
 }

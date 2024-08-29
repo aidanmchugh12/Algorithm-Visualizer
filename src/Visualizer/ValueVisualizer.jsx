@@ -1,6 +1,7 @@
 import React from 'react'
 import './ValueVisualizer.css'
-import {getSelectionSortAnimation} from '../Algorithms/selectionSort'
+import {selectionSort} from '../Algorithms/selectionSort'
+import {insertionSort} from '../Algorithms/insertionSort'
 
 
 
@@ -9,69 +10,67 @@ class ValueVisualizer extends React.Component {
         super(props)
 
         this.state = {
-            value: 100,
-            speed: 100,
+            arraySize: 50,
+            speed: 10,
             animationInProgress: false,
             array: [],
+            barColors: [],
         }
 
     }
 
-    RandomizeArrayValues = (min, max) => {
-        const NewArray = []
-        for(let i = 0; i < this.state.value; i++) {
-            NewArray.push(Math.floor(Math.random() * (max - min + 1) + min))
+    randomizeArrayValues = (min, max) => {
+        const newArray = []
+        const newColors = []
+
+        for(let i = 0; i < this.state.arraySize; i++) {
+            newArray.push(Math.floor(Math.random() * (max - min + 1) + min));
+            newColors.push('black');
         }
 
         this.setState({
-          array: NewArray
+          array: newArray,
+          barColors: newColors,
         })
-        console.log(this.state)
-
       }
-      
-
-    SelectionSortAnimationHandler = async (animations) => {
-        const ArrayBars = document.getElementsByClassName('array-bar');
-        const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-
-        for(let i = 0; i < animations.length; i++) {
-            const animation = animations[i];
-
-            var bar1Style = ArrayBars[animation[0]].style;
-            var bar2Style = ArrayBars[animation[1]].style;
-            bar1Style.backgroundColor = 'red';
-            bar2Style.backgroundColor = 'red';
-
-            await delay(this.state.speed);
-
-            const temp = bar1Style.height;
-            bar1Style.height = bar2Style.height;
-            bar2Style.height = temp;
-
-            await delay(this.state.speed);
-
-            bar1Style.backgroundColor = 'black';
-            bar2Style.backgroundColor = 'black';
+    
+    sortHandler = (sort) => {
+        if(!this.state.animationInProgress) {
+            this.setState({ animationInProgress: true }, () => {
+                sort([...this.state.array], this.getSpeed, this.updateBars).then(() => {
+                    this.setState({ animationInProgress: false });
+                })
+            })
         }
+    }
+
+    updateBars = (colors, arr) => {
+        this.setState({barColors: colors, array: arr});
+    }
+
+    getSpeed = () => {
+        return this.state.speed;
     }
 
 
     componentDidMount() {
-        this.RandomizeArrayValues(10,100)
+        this.randomizeArrayValues(10,100);
     }
 
     render() {
-        const {array} = this.state
+        const { array, barColors } = this.state;
         return (
             <>
-            <button onClick={() => {this.RandomizeArrayValues(10,100)}}>Randomize Values</button>
-            <button onClick={() => {this.SelectionSortAnimationHandler(getSelectionSortAnimation(array))}}>Selection Sort</button>
-            {/* <input onChange={(event) => {this.setState({speed: event.target.value})}} type="range" id="speed-bar" min="100" max="2000" step="100"></input> */}
+            <button onClick={() => {this.randomizeArrayValues(10,100)}} disabled={this.state.animationInProgress}>Randomize Values</button>
+            <button onClick={() => {this.sortHandler(selectionSort)}} disabled={this.state.animationInProgress}>Selection Sort</button>
+            <button onClick={() => {this.sortHandler(insertionSort)}} disabled={this.state.animationInProgress}>Insertion Sort</button>
+
+            <input onChange={(event) => {this.setState({speed: event.target.value})}} type="range" id="speed-bar" min="1" max="500" step="1"></input>
+            {/* <input onChange={(event) => {this.setState({arraySize: event.target.value})}} type="range" id="size-bar" min="5" max="50" step="1"></input> */}
+
             <div class="array-container">
                 {array.map((value, index) => (
-                    <div class="array-bar" key={index} style={{height: `${value/2}vh`}}></div>
+                    <div class="array-bar" key={index} style={{height: `${value/2}vh`, backgroundColor: barColors[index]}}></div>
                 ))}
             </div>
             </>

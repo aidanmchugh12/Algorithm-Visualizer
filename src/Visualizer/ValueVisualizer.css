@@ -12,13 +12,13 @@ body {
     align-items: flex-end;
     width: 80vw;
     height: 60vh;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     box-sizing: border-box;
     padding: 10px;
 }
   
 .array-bar {
-    width: 1vw;
+    width: 2vw;
     display: inline-block;
     margin: 0 1px;
     background-color: black;
