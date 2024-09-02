@@ -8,7 +8,7 @@ export default function NavBar({pageName}) {
             <a className='pageName' href='/'>{pageName}</a>
             <nav className='navbar'>
                 <a href='/'>Home</a>
-                <a href='/'>Contact</a>
+                <a href='/contact'>Contact</a>
             </nav>
         </header>
         </>
