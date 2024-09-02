@@ -6,6 +6,22 @@ body {
     margin: 0;
 }
 
+.visualizer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sorting-tools {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid black;
+    flex-wrap: wrap;
+}
+
 .array-container {
     display: flex;
     justify-content: center;
@@ -21,6 +37,7 @@ body {
     width: 2vw;
     display: inline-block;
     margin: 0 1px;
+    border-radius: 5px;
     background-color: black;
     transition: height 0.2s ease;
   }
