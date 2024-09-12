@@ -6,7 +6,7 @@ import './Contact.css';
 export default function Contact() {
     return (
         <>
-        <NavBar pageName="Algorithm Visualizer"></NavBar>
+        <NavBar pageName="Contact Me!"></NavBar>
         </>
     )
 }

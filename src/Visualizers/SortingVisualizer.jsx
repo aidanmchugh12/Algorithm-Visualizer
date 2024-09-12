@@ -1,9 +1,9 @@
-import React from 'react'
-import './SortingVisualizer.css'
-import NavBar from '../components/NavBar'
-import {selectionSort} from '../Algorithms/Sorts/selectionSort'
-import {insertionSort} from '../Algorithms/Sorts/insertionSort'
-import {bubbleSort} from '../Algorithms/Sorts/bubbleSort'
+import React from 'react';
+import './SortingVisualizer.css';
+import NavBar from '../components/NavBar';
+import {selectionSort} from '../Algorithms/Sorts/selectionSort';
+import {insertionSort} from '../Algorithms/Sorts/insertionSort';
+import {bubbleSort} from '../Algorithms/Sorts/bubbleSort';
 
 
 
@@ -12,9 +12,9 @@ class SortingVisualizer extends React.Component {
         super();
 
         this.state = {
-            arraySize: 25,
-            speed: 250,
-            animationInProgress: false,
+            ArraySize: 25,
+            Speed: 250,
+            AnimationInProgress: false,
             array: [],
             barColors: [],
             currentSort: "",
@@ -26,7 +26,7 @@ class SortingVisualizer extends React.Component {
         const newArray = []
         const newColors = []
 
-        for(let i = 0; i < this.state.arraySize; i++) {
+        for(let i = 0; i < this.state.ArraySize; i++) {
             newArray.push(Math.floor(Math.random() * (max - min + 1) + min));
             newColors.push('black');
         }
@@ -38,7 +38,7 @@ class SortingVisualizer extends React.Component {
       }
     
     sortHandler = () => {
-        if(!this.state.animationInProgress) {
+        if(!this.state.AnimationInProgress) {
             const sortFunctions = {
                 selectionSort: selectionSort,
                 insertionSort: insertionSort,
@@ -47,9 +47,9 @@ class SortingVisualizer extends React.Component {
     
             const selectedSort = sortFunctions[this.state.currentSort];
 
-            this.setState({ animationInProgress: true }, () => {
+            this.setState({ AnimationInProgress: true }, () => {
                 selectedSort([...this.state.array], this.getSpeed, this.updateBars).then(() => {
-                    this.setState({ animationInProgress: false });
+                    this.setState({ AnimationInProgress: false });
                 })
             })
         }
@@ -64,7 +64,7 @@ class SortingVisualizer extends React.Component {
     }
 
     getSpeed = () => {
-        return this.state.speed;
+        return this.state.Speed;
     }
 
 
@@ -81,18 +81,18 @@ class SortingVisualizer extends React.Component {
 
             <div class="visualizer">
                 <div class="sorting-tools">
-                    <button onClick={() => {this.randomizeArrayValues(10,100)}} disabled={this.state.animationInProgress}>Randomize Values</button>
+                    <button onClick={() => {this.randomizeArrayValues(10,100)}} disabled={this.state.AnimationInProgress}>Randomize Values</button>
                     
-                    <select onChange={(event) => this.setCurrentSort(event.target.value)} disabled={this.state.animationInProgress}>
+                    <select onChange={(event) => this.setCurrentSort(event.target.value)} disabled={this.state.AnimationInProgress}>
                         <option value="selectionSort">Selection Sort</option>
                         <option value="insertionSort">Insertion Sort</option>
                         <option value="bubbleSort">Bubble Sort</option>
                     </select>
 
-                    <button onClick={this.sortHandler} disabled={this.state.animationInProgress}>Sort</button>
+                    <button onClick={this.sortHandler} disabled={this.state.AnimationInProgress}>Sort</button>
 
-                    <input onChange={(event) => {this.setState({speed: event.target.value})}} type="range" id="speed-bar" min="10" max="500" step="10"></input>
-                    <input onChange={(event) => {this.setState({arraySize: event.target.value}, () => {this.randomizeArrayValues(10,100)})}} type="range" id="size-bar" min="10" max="50" step="10" disabled={this.state.animationInProgress}></input>
+                    <input onChange={(event) => {this.setState({Speed: event.target.value})}} type="range" id="Speed-bar" min="10" max="500" step="10"></input>
+                    <input onChange={(event) => {this.setState({ArraySize: event.target.value}, () => {this.randomizeArrayValues(10,100)})}} type="range" id="size-bar" min="10" max="50" step="10" disabled={this.state.AnimationInProgress}></input>
                 </div>
 
                 <div class="array-container">

@@ -1,0 +1,17 @@
+.visualizer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.table {
+    border-collapse: collapse;
+    width: min(60vw, 60vh);
+    height: min(60vw, 60vh);
+}
+
+.cell {
+   border: 1px solid black;
+}
