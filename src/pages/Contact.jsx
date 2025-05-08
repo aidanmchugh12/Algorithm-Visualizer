@@ -6,7 +6,7 @@ import './Contact.css';
 export default function Contact() {
     return (
         <>
-        <NavBar pageName="Contact Me!"></NavBar>
+        <NavBar pageName="About!"></NavBar>
         </>
     )
 }

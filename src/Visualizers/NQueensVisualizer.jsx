@@ -24,11 +24,6 @@ class NQueensVisualizer extends React.Component {
         for(let i = 0; i < size; i++) {
             NewBoard[i] = [];
             for(let j = 0; j < size; j++) {
-                // if((i+j) % 2 === 0) {
-                //     NewBoard[i][j] = 0;
-                // } else {
-                //     NewBoard[i][j] = 1;
-                // }
                 NewBoard[i][j] = 0;
             }
         }
@@ -88,8 +83,7 @@ class NQueensVisualizer extends React.Component {
                                     <td 
                                     className="cell" 
                                     key={colIndex} 
-                                    style={{backgroundColor: cell === 0 ? 'white' : 'black',}}
-                                    >
+                                    style={{backgroundColor: cell === 0 ? 'white' : 'black',}}>
                                     </td>
                                 ))}
                             </tr>

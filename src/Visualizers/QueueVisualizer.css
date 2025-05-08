@@ -1,0 +1,27 @@
+.visualizer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.table {
+    border-collapse: collapse;
+    width: auto; /* Let the table size adjust to its content */
+    height: auto; /* Prevent stretching */
+    text-align: center;
+}
+
+.cell {
+    border: 1px solid black;
+    padding: 0; /* Remove padding to ensure perfect squares */
+    font-size: 1.2rem;
+    background-color: #f9f9f9;
+    text-align: center;
+    width: 50px; /* Set a fixed width */
+    height: 0; /* Reset height */
+    padding-bottom: 50px; /* Set height equal to width */
+    justify-content: center; /* Center content horizontally */
+    align-items: center;
+}
